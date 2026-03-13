@@ -52,7 +52,7 @@ export async function processAndEmbedPdf(
   // Upsert vectors in batches of 100
   for (let i = 0; i < vectors.length; i += 100) {
     const batch = vectors.slice(i, i + 100);
-    await index.namespace(PINECONE_NAMESPACE).upsert(batch);
+    await index.namespace(PINECONE_NAMESPACE).upsert({ records: batch });
   }
 
   // Save chunks to DB
